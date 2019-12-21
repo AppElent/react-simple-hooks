@@ -5,7 +5,9 @@
     "main": "./lib/index.js",
     "license": "MIT",
     "scripts": {
-        "build": "webpack"
+        "build": "npm run lint && webpack",
+        "lint": "eslint --ext=jsx,ts,tsx,js src",
+        "lint:fix": "eslint --ext=jsx,ts,tsx,js src --fix"
     },
     "peerDependencies": {
         "prop-types": "^15.6.0",
@@ -15,12 +17,19 @@
     "devDependencies": {
         "@types/react": "^16.9.17",
         "@types/react-dom": "^16.9.4",
+        "@typescript-eslint/eslint-plugin": "^2.12.0",
+        "@typescript-eslint/parser": "^2.12.0",
         "babel-core": "^6.21.0",
         "babel-loader": "^7.1.4",
         "babel-preset-env": "^1.6.1",
         "babel-preset-react": "^6.16.0",
         "babel-preset-stage-0": "^6.24.1",
+        "eslint": "^6.8.0",
+        "eslint-config-prettier": "^6.7.0",
+        "eslint-plugin-prettier": "^3.1.2",
+        "eslint-plugin-react": "^7.17.0",
         "path": "^0.12.7",
+        "prettier": "^1.19.1",
         "prop-types": "^15.6.0",
         "react": "^16.0.0",
         "react-dom": "^16.0.0",

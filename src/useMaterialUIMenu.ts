@@ -1,21 +1,19 @@
 import { useState } from 'react';
 
 const useMaterialUIMenu = () => {
+    const [anchorEl, setAnchorEl] = useState(null);
 
-  const [anchorEl, setAnchorEl] = useState(null);
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  }
+    const handleOpen = event => {
+        setAnchorEl(event.currentTarget);
+    };
 
-  const handleOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  }
+    const open = Boolean(anchorEl);
 
-  const open = Boolean(anchorEl);
-
-
-  return Object.assign([anchorEl, open, handleOpen, handleClose], { anchorEl, open, handleOpen, handleClose })
-}
+    return Object.assign([anchorEl, open, handleOpen, handleClose], { anchorEl, open, handleOpen, handleClose });
+};
 
 export default useMaterialUIMenu;
