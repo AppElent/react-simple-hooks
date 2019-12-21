@@ -1,9 +1,9 @@
-import * as React from 'react';
+import React from 'react';
 
 type HelloProps = {
     compiler: string;
     framework: string;
-}
+};
 
 export const Hello = (props: HelloProps): React.ReactNode => (
     <h1>
