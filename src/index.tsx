@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export interface HelloProps {
+type HelloProps = {
     compiler: string;
     framework: string;
 }
