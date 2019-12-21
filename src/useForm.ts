@@ -2,6 +2,10 @@ import { useState, useEffect, useCallback } from 'react';
 import * as validate from 'validate.js';
 import _ from 'lodash';
 
+type TypeFormOptions = {
+    localStorage?: any;
+};
+
 const get = (key, storage = window.localStorage): any => {
     const item = storage.getItem(key);
     // Parse stored json or if none return initialValue
@@ -15,7 +19,7 @@ const set = (key, value, storage = window.localStorage): void => {
     storage.setItem(key, JSON.stringify(valueToStore));
 };
 
-function useForm(stateSchema, validationSchema: {} = {}, callback, options: {} = {}) {
+function useForm(stateSchema, validationSchema: {} = {}, callback, options: TypeFormOptions = {}) {
     const formatStateSchema = (schema: any) => {
         const newSchema = {};
         const keys = Object.keys(schema);
