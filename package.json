@@ -1,6 +1,6 @@
 {
     "name": "react-simple-hooks",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "description": "Collection of simple react hooks",
     "main": "./lib/index.js",
     "license": "MIT",
