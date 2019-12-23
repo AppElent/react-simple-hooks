@@ -7,7 +7,8 @@
     "scripts": {
         "build": "npm run lint && webpack",
         "lint": "eslint --ext=jsx,ts,tsx,js src",
-        "lint:fix": "eslint --ext=jsx,ts,tsx,js src --fix"
+        "lint:fix": "eslint --ext=jsx,ts,tsx,js src --fix",
+        "prepublishOnly": "npm run lint && npm run build"
     },
     "peerDependencies": {
         "prop-types": "^15.6.0",
