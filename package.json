@@ -1,6 +1,6 @@
 {
     "name": "react-simple-hooks",
-    "version": "0.1.6",
+    "version": "0.1.7",
     "description": "Collection of simple react hooks",
     "main": "./lib/index.js",
     "types": "./lib/index",
@@ -10,7 +10,7 @@
         "lint": "eslint --ext=jsx,ts,tsx,js src",
         "lint:fix": "eslint --ext=jsx,ts,tsx,js src --fix",
         "prepublishOnly": "npm run lint && npm run build",
-        "tsc:declaration" : "tsc --declaration",
+        "tsc:declaration": "tsc --declaration",
         "publish:patch": "npm version patch && npm publish",
         "publish:minor": "npm version minor && npm publish",
         "publish:major": "npm version major && npm publish"
