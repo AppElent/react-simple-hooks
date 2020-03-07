@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import validate from 'validate.js';
+import * as validate from 'validate.js';
 import * as _ from 'lodash';
 
 type TypeFormOptions = {
