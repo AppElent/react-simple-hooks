@@ -1,27 +1,27 @@
 import { useState, useEffect, useCallback } from 'react';
-import * as validate from 'validate.js';
-import _ from 'lodash';
+import validate from 'validate.js';
+import * as _ from 'lodash';
 
 type TypeFormOptions = {
     localStorage?: any;
 };
 
-const get = (key, storage = window.localStorage): any => {
+const get = (key: string, storage = window.localStorage): any => {
     const item = storage.getItem(key);
     // Parse stored json or if none return initialValue
     return item ? JSON.parse(item) : undefined;
 };
 
-const set = (key, value, storage = window.localStorage): void => {
+const set = (key: string, value: any, storage = window.localStorage): void => {
     // Allow value to be a function so we have same API as useState
     const valueToStore = value instanceof Function ? value(value) : value;
     // Save to local storage
     storage.setItem(key, JSON.stringify(valueToStore));
 };
 
-function useForm(stateSchema, validationSchema: {} = {}, callback, options: TypeFormOptions = {}) {
-    const formatStateSchema = (schema: any) => {
-        const newSchema = {};
+function useForm(stateSchema: any, validationSchema: {} = {}, callback: Function, options: TypeFormOptions = {}): any {
+    const formatStateSchema = (schema: any): any => {
+        const newSchema: any = {};
         const keys = Object.keys(schema);
         for (const key of keys) {
             newSchema[key] = {
@@ -33,8 +33,8 @@ function useForm(stateSchema, validationSchema: {} = {}, callback, options: Type
         return newSchema;
     };
 
-    const formatStateDate = data => {
-        const newSchema = {};
+    const formatStateDate = (data: any): any => {
+        const newSchema: any = {};
         const keys = Object.keys(data);
         for (const key of keys) {
             newSchema[key] = data[key].value;
@@ -53,7 +53,7 @@ function useForm(stateSchema, validationSchema: {} = {}, callback, options: Type
             return true;
         }
         const stateKeys = Object.keys(state);
-        const validationState = {};
+        const validationState: any = {};
         for (const key of stateKeys) {
             validationState[key] = state[key].value;
         }
@@ -107,7 +107,7 @@ function useForm(stateSchema, validationSchema: {} = {}, callback, options: Type
                 error = validateErrors[name];
             }
             if (options.localStorage) set(options.localStorage, formatStateDate({ ...state, [name]: { value } }));
-            setState(prevState => ({
+            setState((prevState: any): void => ({
                 ...prevState,
                 [name]: { value, error, touched: true },
             }));
@@ -116,7 +116,7 @@ function useForm(stateSchema, validationSchema: {} = {}, callback, options: Type
     );
 
     const handleOnValueChange = useCallback(
-        name => value => {
+        name => (value: any): void => {
             if (isDirty === false) setIsDirty(true);
 
             let error = '';
@@ -126,7 +126,7 @@ function useForm(stateSchema, validationSchema: {} = {}, callback, options: Type
             }
             console.log(999, error, name, value);
             if (options.localStorage) set(options.localStorage, formatStateDate({ ...state, [name]: { value } }));
-            setState(prevState => ({
+            setState((prevState: any) => ({
                 ...prevState,
                 [name]: { value, error, touched: true },
             }));
@@ -148,7 +148,7 @@ function useForm(stateSchema, validationSchema: {} = {}, callback, options: Type
                 console.log(999, error, name, value);
                 savedNewState = { ...savedNewState, [name]: { value } };
                 if (options.localStorage) set(options.localStorage, formatStateDate(savedNewState));
-                setState(prevState => ({
+                setState((prevState: any) => ({
                     ...prevState,
                     [name]: { value, error, touched: true },
                 }));
@@ -178,30 +178,17 @@ function useForm(stateSchema, validationSchema: {} = {}, callback, options: Type
         setState(stateSchema);
     }, []);
 
-    return Object.assign(
-        [
-            hasError,
-            isDirty,
-            state,
-            handleOnChange,
-            handleOnValueChange,
-            setFormValue,
-            handleOnSubmit,
-            submitting,
-            setInitial,
-        ],
-        {
-            hasError,
-            isDirty,
-            state,
-            handleOnChange,
-            handleOnValueChange,
-            setFormValue,
-            handleOnSubmit,
-            submitting,
-            setInitial,
-        },
-    );
+    return {
+        hasError,
+        isDirty,
+        state,
+        handleOnChange,
+        handleOnValueChange,
+        setFormValue,
+        handleOnSubmit,
+        submitting,
+        setInitial,
+    };
 }
 
 export default useForm;
